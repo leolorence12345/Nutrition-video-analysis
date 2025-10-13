@@ -16,6 +16,26 @@
 
 </div>
 
+## 🚀 Live Production API
+
+**🔗 GitHub**: https://github.com/leolorence12345/-nutrition-video-analysis  
+**🌐 Live Demo**: http://18.214.98.110:8000  
+**📚 API Docs**: http://18.214.98.110:8000/docs  
+**❤️ Health Check**: http://18.214.98.110:8000/health
+
+**Production Deployment**: AWS EC2 (t3.xlarge)
+
+This repository includes a **production-ready nutrition analysis API** that uses:
+- 🔍 **Florence-2**: Automatic food detection from images
+- 🎯 **SAM2**: Video object tracking with continuous IDs
+- 📏 **Metric3D**: Depth & volume estimation
+- 🧠 **RAG System**: Calorie & nutrition database (FNDDS + CoFID)
+- 🤖 **Gemini API**: Fallback for unknown food items
+
+See [`Grounded-SAM-2/deploy/`](Grounded-SAM-2/deploy/) for deployment guide.
+
+---
+
 <b>Nutrition5k</b> is a dataset of visual and nutritional data for ~5k realistic plates of food captured from Google cafeterias using a custom scanning rig. We are releasing this dataset alongside our recent <a href="https://arxiv.org/abs/2103.03375">CVPR 2021 paper</a> to help promote research in visual nutrition understanding. Please see the paper for more details on the dataset and follow-up experiments.
 
 ### Key Features
@@ -34,6 +54,54 @@
 </ul>
 
 <i>→ [Also, see our related <a href="https://tfhub.dev/google/seefood/segmenter/mobile_food_segmenter_V1/1">Mobile Food Segmentation model on TensorFlow Hub</a>]</i>
+
+## 🚀 Quick Start
+
+### Setup Environment
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# Windows:
+venv\Scripts\activate
+# Linux/Mac:
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set Gemini API key
+export GEMINI_API_KEY='your_api_key_here'  # Linux/Mac
+$env:GEMINI_API_KEY="your_api_key_here"   # Windows PowerShell
+```
+
+### Run Demos
+```bash
+# Simple food analysis demo
+python demos/simple_demo.py
+
+# Video analysis demo
+python demos/video_demo.py
+
+# Visualize existing results
+python demos/view_visualizations.py
+```
+
+## 📁 Project Structure
+
+```
+Nutrition5k/
+├── demos/              # Demo scripts and examples
+├── core/               # Core tracking and analysis systems
+├── results/            # Output results and visualizations
+├── videos/             # Video files for analysis
+├── data/               # Dataset files (Food101, Nutrition5k)
+├── res/                # Resources and sample images
+├── scripts/            # Utility scripts
+├── requirements.txt    # Python dependencies
+└── README.md          # This file
+```
 
 ### Download Data
 All Nutrition5k data can be downloaded directly from our [Google Cloud Storage bucket](https://console.cloud.google.com/storage/browser/nutrition5k_dataset), or from the .tar.gz download link below.

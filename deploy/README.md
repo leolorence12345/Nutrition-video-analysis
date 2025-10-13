@@ -1,13 +1,27 @@
 # Nutrition Video Analysis API - Deployment Guide
 
+**🔗 GitHub Repository**: https://github.com/leolorence12345/-nutrition-video-analysis
+
 Production-ready REST API for automated food recognition and calorie estimation from videos.
+
+## 🚀 Live Production Deployment
+
+**🌐 API**: http://18.214.98.110:8000  
+**📚 Interactive Docs**: http://18.214.98.110:8000/docs  
+**❤️ Health Check**: http://18.214.98.110:8000/health
+
+**Current Instance**: AWS EC2 t3.xlarge (CPU-only, for testing)  
+**Status**: ✅ Running  
+**Deployed From**: GitHub (leolorence12345/-nutrition-video-analysis)
+
+> **⚠️ Note**: Current t3 instance is for API testing only. Full AI pipeline (Florence-2, SAM2, Metric3D) requires GPU instance (g4dn.xlarge recommended).
 
 ## 🏗️ Architecture
 
 ```
 User → FastAPI → [Florence-2] → [SAM2] → [Metric3D] → [RAG] → Results
-                      ↓              ↓          ↓           ↓
-                  Detection    Tracking    Depth    Nutrition DB
+                     ↓              ↓          ↓           ↓
+                 Detection    Tracking    Depth    Nutrition DB
 ```
 
 ## 📋 Prerequisites

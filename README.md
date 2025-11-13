@@ -2,7 +2,7 @@
 
 A comprehensive food detection, tracking, and nutrition analysis system using multiple AI models including Gemini, YOLO-World, Grounding DINO, SAM2, and more.
 
-## 🎥 Video Preview
+## Video Preview
 
 <div align="center">
 

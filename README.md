@@ -10,15 +10,15 @@ A comprehensive food detection, tracking, and nutrition analysis system using mu
 
 [![Food Tracking Demo - Click to Play](res/example_plate.jpg)](./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4)
 
-**📹 [▶️ Click here to watch/download the tracking video](./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4)**
+**📹 [ Click here to watch/download the tracking video](./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4)**
 
 > **Note**: Click the image or link above to view the video. The video file will open in your browser where you can play it directly or download it.
 
 **What this video demonstrates:**
-- ✅ Food item detection and tracking with continuous IDs
-- ✅ Segmentation masks for each tracked item  
-- ✅ Frame-by-frame object persistence
-- ✅ Real-time visualization of tracking results
+-  Food item detection and tracking with continuous IDs
+-  Segmentation masks for each tracked item  
+-  Frame-by-frame object persistence
+-  Real-time visualization of tracking results
 
 </div>
 

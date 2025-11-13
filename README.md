@@ -1,6 +1,6 @@
 <div align="center">
 
-# N
+# Nutrition5k: Food Tracking and Analysis System
 
 <p align="center">
 	<img src="res/example_plate.jpg" width="400px">
@@ -8,7 +8,6 @@
 </p>
 
 <p align="center">
-	<a href="https://arxiv.org/pdf/2103.03375.pdf"><b>Paper</b></a> •
 	<a href="#download-data"><b>Download Data</b></a> •
 	<a href="#dataset-contents"><b>Dataset Contents</b></a> •
 	<a href="#license--contact"><b>License & Contact</b></a>
@@ -46,7 +45,7 @@ See `WHY_DETECTIONS_ARE_WRONG.md` for insights into model limitations and soluti
 
 ---
 
-<b>Nutrition5k</b> is a dataset of visual and nutritional data for ~5k realistic plates of food captured from Google cafeterias using a custom scanning rig. We are releasing this dataset alongside our recent <a href="https://arxiv.org/abs/2103.03375">CVPR 2021 paper</a> to help promote research in visual nutrition understanding. Please see the paper for more details on the dataset and follow-up experiments.
+<b>Nutrition5k</b> is a dataset of visual and nutritional data for ~5k realistic plates of food. This repository extends the dataset with advanced food tracking, detection, and analysis capabilities.
 
 ### Key Features
 <ul>
@@ -251,7 +250,7 @@ After downloading the Nutrition5k dataset, video files will be found in `imagery
 ffmpeg -i input.mp4 output_%03d.jpeg
 ```
 
-The models included in the Nutrition5k paper were trained and evaluated on every fifth frame sampled from each video. The repository includes `scripts/extract_frames.sh` and `scripts/extract_frames_sampled.sh` to help with frame extraction from the downloaded dataset.
+The repository includes `scripts/extract_frames.sh` and `scripts/extract_frames_sampled.sh` to help with frame extraction from the downloaded dataset.
 
 #### Overhead RGB-D Images
 After downloading the dataset, the `imagery/realsense_overhead/` directory contains RGB, raw depth, and colorized depth images organized by dish ID. Raw depth images are encoded as 16-bit integer images with depth units of 10,000 (i.e. 1 meter = 10,000 units). The colorized depth images provide a human-readable visualization of the depth map, with closer objects in blue and further objects in red. All depth values are rounded to a maximum of 0.4m (4,000 depth units), which exceeds the height of our food scanning rig.
@@ -267,27 +266,13 @@ After downloading the dataset, the dish metadata CSVs (`metadata/dish_metadata_c
 with the last 8 fields repeated for every ingredient present in the dish.
 
 #### Train/Test Splits
-After downloading the dataset, dish IDs for the training and testing splits used in the experiments are in the `dish_ids/splits/` directory. All incremental scans that compose a unique plate are held within the same split, to avoid overlap between the train and test splits. See Section 3.6 of the paper for more details on incremental scanning.
+After downloading the dataset, dish IDs for the training and testing splits are in the `dish_ids/splits/` directory. All incremental scans that compose a unique plate are held within the same split, to avoid overlap between the train and test splits.
 
 #### Evaluation Script
-To help evaluate nutrition prediction methods, we provide `scripts/compute_eval_statistics.py`. This script can be used to calculate absolute and percentage mean average error from a CSV of per-dish nutrition values. This tool can be used to generate regression results that can be directly compared to those reported in the paper. See the header file for usage instructions.
+To help evaluate nutrition prediction methods, we provide `scripts/compute_eval_statistics.py`. This script can be used to calculate absolute and percentage mean average error from a CSV of per-dish nutrition values. See the header file for usage instructions.
 
 ## Dataset Bias Disclaimer
 The dataset does not cover all food cuisines, as it was only collected in a few select cafeterias in California, USA. Nutrition5k does not claim to completely solve the food understanding problem, but rather aims to provide a unique level of detailed annotations and depth data to further advance the space.
 
 ## License & Contact
-We release all Nutrition5k data under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons V4.0</a> license. You are free to share and adapt this data for any purpose, even commercially. If you found this dataset useful, please consider citing our [CVPR 2021 paper](https://arxiv.org/pdf/2103.03375.pdf).
-```
-@inproceedings{thames2021nutrition5k,
-  title={Nutrition5k: Towards Automatic Nutritional Understanding of Generic Food},
-  author={Thames, Quin and Karpur, Arjun and Norris, Wade and Xia, Fangting and Panait, Liviu and Weyand, Tobias and Sim, Jack},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-  pages={8903--8911},
-  year={2021}
-}
-```
-
-If you have any questions about the Nutrition5k dataset or paper, please send an email to the authors at <a href="mailto:nutrition5k@google.com">nutrition5k@google.com</a>.
-
-
-Thank you to Ben Goldberger, Caitlin O'Brien, and the Google LAX/PLV Cafeteria teams for their contributions!
+The Nutrition5k dataset is released under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons V4.0</a> license. This repository extends the dataset with additional tools and capabilities for food tracking and analysis.

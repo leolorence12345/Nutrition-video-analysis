@@ -8,11 +8,11 @@ A comprehensive food detection, tracking, and nutrition analysis system using mu
 
 ### Watch the Demo Video
 
-[![Food Tracking Demo Video](https://img.shields.io/badge/▶️-Watch%20Video%20Demo-red?style=for-the-badge)](./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4)
+[![Food Tracking Demo - Click to Play](res/example_plate.jpg)](./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4)
 
-**📹 [Click here to view/download the tracking video](./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4)**
+**📹 [▶️ Click here to watch/download the tracking video](./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4)**
 
-> **Note**: Click the link above to view the video. GitHub will display it as a downloadable file that you can play in your browser or download.
+> **Note**: Click the image or link above to view the video. The video file will open in your browser where you can play it directly or download it.
 
 **What this video demonstrates:**
 - ✅ Food item detection and tracking with continuous IDs

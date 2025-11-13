@@ -1,6 +1,6 @@
 <div align="center">
 
-# Nutrition5k: A Comprehensive Nutrition Dataset
+# N
 
 <p align="center">
 	<img src="res/example_plate.jpg" width="400px">

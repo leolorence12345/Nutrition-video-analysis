@@ -2,6 +2,27 @@
 
 A comprehensive food detection, tracking, and nutrition analysis system using multiple AI models including Gemini, YOLO-World, Grounding DINO, SAM2, and more.
 
+## Video Preview
+
+<div align="center">
+
+### 🎥 Example Tracking Video
+
+<video width="800" controls>
+  <source src="./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+**Direct Link**: [smart_tracked_WhatsApp Video 2025-09-10 at 05.16.56_9874c762.mp4](./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4)
+
+**What this video demonstrates:**
+- ✅ Food item detection and tracking with continuous IDs
+- ✅ Segmentation masks for each tracked item
+- ✅ Frame-by-frame object persistence
+- ✅ Real-time visualization of tracking results
+
+</div>
+
 ## Live Production API
 
 **GitHub**: https://github.com/leolorence12345/-nutrition-video-analysis  
@@ -197,16 +218,9 @@ Nutrition5k/
 └── README.md                       # This file
 ```
 
-## Video Tracking Demo
+## Additional Video Results
 
-**Example Tracking Video**: [smart_tracked_WhatsApp Video 2025-09-10 at 05.16.56_9874c762.mp4](./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4)
-
-This video demonstrates:
-- Food item detection and tracking with continuous IDs
-- Segmentation masks for each tracked item
-- Frame-by-frame object persistence
-
-Additional tracking results are available in:
+More tracking results are available in:
 - `videos/` - Sample input videos
 - `data/food_videos_tracking_results/` - Processed tracking videos
 - `data/metric3d_results/` - Videos with depth and volume estimation

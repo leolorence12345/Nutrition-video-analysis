@@ -1,19 +1,6 @@
-<div align="center">
+# Food Tracking and Analysis System
 
-# Nutrition5k: Food Tracking and Analysis System
-
-<p align="center">
-	<img src="res/example_plate.jpg" width="400px">
-	<img src="res/scan.gif" width="400px">
-</p>
-
-<p align="center">
-	<a href="#download-data"><b>Download Data</b></a> •
-	<a href="#dataset-contents"><b>Dataset Contents</b></a> •
-	<a href="#license--contact"><b>License & Contact</b></a>
-</p>
-
-</div>
+A comprehensive food detection, tracking, and nutrition analysis system using multiple AI models including Gemini, YOLO-World, Grounding DINO, SAM2, and more.
 
 ## Live Production API
 
@@ -24,60 +11,21 @@
 
 **Production Deployment**: AWS EC2 (t3.xlarge)
 
-This repository includes a **production-ready nutrition analysis API** that uses:
-- **Florence-2**: Automatic food detection from images
-- **SAM2**: Video object tracking with continuous IDs
-- **Metric3D**: Depth & volume estimation
-- **RAG System**: Calorie & nutrition database (FNDDS + CoFID)
-- **Gemini API**: Fallback for unknown food items
+## Features
 
-See [`Grounded-SAM-2/deploy/README.md`](Grounded-SAM-2/deploy/README.md) for deployment guide.
-
-## Research & Analysis
-
-The project includes comprehensive analysis documents in the `analysis/` directory:
-
-- **Methods Comparison**: Detailed comparison of different detection and segmentation approaches
-- **Cost Analysis**: API cost analysis for Gemini and video processing
-- **3D Volume Estimation**: Analysis of depth and volume estimation methods
-
-See `WHY_DETECTIONS_ARE_WRONG.md` for insights into model limitations and solutions.
-
----
-
-<b>Nutrition5k</b> is a dataset of visual and nutritional data for ~5k realistic plates of food. This repository extends the dataset with advanced food tracking, detection, and analysis capabilities.
-
-### Key Features
-<ul>
-	<li>Scans data for 5,006 plates of food, each containing:
-		<ul>
-			<li>4 rotating side-angle videos</li>
-			<li>Overhead RGB-D images <i>(when available)</i></li>
-			<li>Fine-grained list of ingredients</li>
-			<li>Per-ingredient mass</li>
-			<li>Total dish mass and calories</li>
-			<li>Fat, protein, and carbohydrate macronutrient masses</li>
-		</ul></li>
-	<li>Official train/test split</li>
-	<li>Nutrition regression eval scripts</li>
-</ul>
-
-### Project Capabilities
-
-This repository extends the Nutrition5k dataset with:
-
-- **Multi-Model Detection**: Support for YOLO-World, Grounding DINO, OWL-ViT, Detectron2, and Gemini
-- **Video Tracking**: DeepSORT, ByteTrack, and SAM2-based tracking systems
+- **Multi-Model Detection**: Support for Gemini, YOLO-World, Grounding DINO, OWL-ViT, Detectron2, and YOLOE
+- **Video Tracking**: DeepSORT, ByteTrack, and SAM2-based tracking systems with continuous object IDs
 - **Segmentation**: SAM, SAM2, and CLIP-based segmentation methods
-- **3D Analysis**: Metric3D integration for depth and volume estimation (in Grounded-SAM-2/deploy)
-- **Nutrition Database**: RAG system with FNDDS and CoFID databases (in Grounded-SAM-2/deploy)
+- **Live Visualization**: Real-time tracking and detection visualization tools
+- **Production API**: FastAPI-based REST API for video analysis (see `deploy/` directory)
+- **3D Analysis**: Metric3D integration for depth and volume estimation
+- **Nutrition Database**: RAG system with FNDDS and CoFID databases
 - **Model Fine-tuning**: Scripts for fine-tuning Grounding DINO on custom food datasets
-
-<i>→ [Also, see our related <a href="https://tfhub.dev/google/seefood/segmenter/mobile_food_segmenter_V1/1">Mobile Food Segmentation model on TensorFlow Hub</a>]</i>
 
 ## Quick Start
 
 ### Setup Environment
+
 ```bash
 # Create virtual environment
 python -m venv venv
@@ -91,12 +39,13 @@ source venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Set Gemini API key
+# Set Gemini API key (required for Gemini-based demos)
 export GEMINI_API_KEY='your_api_key_here'  # Linux/Mac
 $env:GEMINI_API_KEY="your_api_key_here"   # Windows PowerShell
 ```
 
 ### Run Demos
+
 ```bash
 # Simple food analysis demo
 python demos/simple_demo.py
@@ -114,11 +63,10 @@ python demos/compare_all_models.py
 python demos/gemini_bbox_detection.py
 python demos/grounding_dino_detection.py
 python demos/yolo_world_detection.py
+python demos/yoloe_detection.py
 ```
 
 ### Core Systems
-
-The project includes several production-ready systems for food analysis:
 
 #### Video Food Analysis System
 ```bash
@@ -127,9 +75,18 @@ python core/video_food_analysis_system.py
 ```
 
 #### Tracking Systems
-- **Gemini-based tracking**: Uses Gemini API for object detection and tracking
-- **DeepSORT tracking**: Multi-object tracking with DeepSORT
-- **ByteTrack integration**: ByteTrack-based tracking with Gemini
+- **Gemini-based tracking**: `core/gemini_object_detection_tracking.py`, `core/gemini_segmentation_tracking.py`
+- **DeepSORT tracking**: `core/final_deepsort_system.py`, `core/proper_deepsort_tracking.py`
+- **ByteTrack integration**: `core/bytetrack_gemini_integration.py`
+- **Working systems**: `core/working_gemini_detection_tracking.py`, `core/working_tracking_system.py`
+
+#### Live Visualization
+```bash
+# Real-time visualization tools
+python core/live_bytetrack_visualization.py
+python core/live_opencv_visualization.py
+python core/live_segmentation_visualization.py
+```
 
 #### Model Testing
 ```bash
@@ -137,15 +94,18 @@ python core/video_food_analysis_system.py
 python scripts/test_owlvit_detection.py
 python scripts/test_detectron2_clip.py
 python scripts/test_sam_clip.py
+python scripts/test_maskrcnn_clip.py
+python scripts/test_open_food_detection.py
 ```
 
 ### Production API
 
-The project includes a production-ready API in `Grounded-SAM-2/deploy/`:
+The project includes a production-ready API in `deploy/`:
 
 ```bash
-cd Grounded-SAM-2/deploy
+cd deploy
 # See deploy/README.md for full deployment instructions
+python run_local.py
 ```
 
 **Live API**: http://18.214.98.110:8000/docs
@@ -154,79 +114,90 @@ cd Grounded-SAM-2/deploy
 
 ```
 Nutrition5k/
-├── core/                    # Core tracking and analysis systems
-│   ├── video_food_analysis_system.py    # Main video analysis pipeline
-│   ├── gemini_*_tracking.py             # Gemini-based tracking systems
-│   ├── working_*_system.py              # Production tracking implementations
-│   └── live_*_visualization.py          # Real-time visualization tools
-├── demos/                    # Demo scripts and examples
-│   ├── simple_demo.py                   # Basic food analysis demo
-│   ├── video_demo.py                    # Video processing demo
-│   ├── compare_all_models.py            # Model comparison utilities
-│   └── *_detection.py                   # Various detection demos
-├── scripts/                  # Utility scripts
-│   ├── compute_eval_statistics.py       # Nutrition evaluation metrics
-│   ├── generate_*_dataset.py           # Dataset generation tools
-│   ├── finetune_grounding_dino*.py      # Model fine-tuning scripts
-│   └── test_*.py                        # Model testing scripts
-├── Grounded-SAM-2/           # Grounded SAM-2 implementation
-│   ├── deploy/                          # Production deployment
-│   ├── sam2/                            # SAM2 model implementation
-│   ├── grounding_dino/                  # Grounding DINO implementation
-│   └── nutrition_rag_system.py          # RAG system for nutrition data
-├── analysis/                 # Analysis and comparison documents
-│   ├── methods_comparison.md            # Detailed method comparisons
+├── core/                           # Core tracking and analysis systems
+│   ├── video_food_analysis_system.py      # Main video analysis pipeline
+│   ├── gemini_object_detection_tracking.py
+│   ├── gemini_segmentation_tracking.py
+│   ├── simple_gemini_tracking.py
+│   ├── simple_gemini_segmentation.py
+│   ├── final_deepsort_system.py
+│   ├── proper_deepsort_tracking.py
+│   ├── bytetrack_gemini_integration.py
+│   ├── working_gemini_detection_tracking.py
+│   ├── working_tracking_system.py
+│   ├── live_bytetrack_visualization.py
+│   ├── live_opencv_visualization.py
+│   └── live_segmentation_visualization.py
+├── demos/                          # Demo scripts and examples
+│   ├── simple_demo.py
+│   ├── video_demo.py
+│   ├── compare_all_models.py
+│   ├── comprehensive_model_comparison.py
+│   ├── gemini_bbox_detection.py
+│   ├── gemini_2_bbox_detection.py
+│   ├── grounding_dino_detection.py
+│   ├── grounding_dino_hf_detection.py
+│   ├── grounding_dino_multi_prompt.py
+│   ├── yolo_world_detection.py
+│   ├── yolo_world_enhanced.py
+│   ├── yoloe_detection.py
+│   ├── yoloe_prompt_free.py
+│   ├── live_bbox_detection.py
+│   ├── live_bbox_with_save.py
+│   ├── view_visualizations.py
+│   ├── view_analysis_video.py
+│   └── visualize_results.py
+├── scripts/                        # Utility scripts
+│   ├── compute_eval_statistics.py
+│   ├── generate_dataset_with_gemini.py
+│   ├── generate_grounding_dino_dataset.py
+│   ├── finetune_grounding_dino.py
+│   ├── finetune_grounding_dino_simple.py
+│   ├── finetune_grounding_dino_qlora.py
+│   ├── test_owlvit_detection.py
+│   ├── test_detectron2_clip.py
+│   ├── test_sam_clip.py
+│   ├── test_maskrcnn_clip.py
+│   ├── test_open_food_detection.py
+│   ├── extract_frames.sh
+│   └── extract_frames_sampled.sh
+├── deploy/                         # Production API deployment
+│   ├── app/                        # FastAPI application
+│   ├── README.md                   # Deployment guide
+│   ├── requirements.txt
+│   ├── Dockerfile
+│   └── docker-compose.yml
+├── Grounded-SAM-2/                 # Grounded SAM-2 implementation
+│   ├── deploy/                     # Alternative deployment location
+│   ├── sam2/                       # SAM2 model implementation
+│   ├── grounding_dino/             # Grounding DINO implementation
+│   └── nutrition_rag_system.py      # RAG system for nutrition data
+├── analysis/                       # Analysis and comparison documents
+│   ├── methods_comparison.md
 │   ├── video_processing_cost_analysis.md
 │   ├── gemini_production_cost_analysis.md
 │   └── gemini_2.5_flash_3d_volume_estimation.md
-├── models/                    # Pre-trained model files
-│   ├── cache/                           # Model cache directory
-│   ├── grounding_dino_finetuned/        # Fine-tuned models
-│   └── sam_vit_*.pth                    # SAM model checkpoints
-├── data/                     # Dataset files and results
-│   ├── food_videos_dataset/             # Food video dataset
-│   ├── food101_local/                   # Food-101 dataset
-│   ├── gemini_food_dataset/             # Gemini-generated annotations
-│   └── *_results/                       # Various model results
-├── results/                  # Output results and visualizations
-├── videos/                   # Video files for analysis
-├── res/                      # Resources and sample images
-├── requirements.txt          # Python dependencies
-├── download_food_dataset.py  # Dataset download utility
-└── README.md                # This file
+├── models/                         # Pre-trained model files
+│   ├── cache/
+│   ├── grounding_dino_finetuned/
+│   └── sam_vit_*.pth
+├── data/                           # Dataset files and results
+│   ├── food_videos_dataset/        # Food video dataset
+│   ├── food101_local/              # Food-101 dataset
+│   ├── gemini_food_dataset/        # Gemini-generated annotations
+│   ├── food_videos_tracking_results/
+│   ├── metric3d_results/
+│   └── *_results/                  # Various model results
+├── results/                        # Output results and visualizations
+├── videos/                         # Video files for analysis
+├── res/                            # Resources and sample images
+├── requirements.txt                # Python dependencies
+├── download_food_dataset.py        # Dataset download utility
+├── WHY_DETECTIONS_ARE_WRONG.md     # Model limitations analysis
+└── README.md                       # This file
 ```
 
-### Download Data
-All Nutrition5k data can be downloaded directly from our [Google Cloud Storage bucket](https://console.cloud.google.com/storage/browser/nutrition5k_dataset), or from the .tar.gz download link below.
-<ul>
-	<li><a href="https://storage.cloud.google.com/nutrition5k_dataset/nutrition5k_dataset.tar.gz">nutrition5k_dataset.tar.gz</a> (181.4 GB)
-</ul>
-
-From the Cloud Storage bucket directory, you can also browse through the dataset folders and download specific files using the `gsutil cp` command:
-```
-gsutil -m cp -r "gs://nutrition5k_dataset/nutrition5k_dataset/{FILE_OR_DIR_PATH}" .
-```
-
-See [here](https://cloud.google.com/storage/docs/gsutil) for instructions on installing the `gsutil` tool.
-
-### Examples
-
-<p align="center">
-	<img src="res/plate_1.jpg">
-	<img src="res/plate_2.jpg">
-	<img src="res/plate_3.jpg">
-	<img src="res/plate_4.jpg">
-	<i><b>Example side-angle and overhead frames, with nutrition labels.</b></i>
-</p>
-
-<p align="center">
-	<img src="res/incremental.jpg">
-	<i><b>Example of the incremental scanning procedure.</b></i>
-</p>
-
-### Video Tracking Demo
-
-The repository includes example videos demonstrating food tracking and analysis:
+## Video Tracking Demo
 
 **Example Tracking Video**: [smart_tracked_WhatsApp Video 2025-09-10 at 05.16.56_9874c762.mp4](./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4)
 
@@ -240,39 +211,59 @@ Additional tracking results are available in:
 - `data/food_videos_tracking_results/` - Processed tracking videos
 - `data/metric3d_results/` - Videos with depth and volume estimation
 
-## Dataset contents
+## Supported Models
 
-#### Side-Angle Videos
-Video recordings were captured using 4 separate Raspberry Pi cameras (labeled A-D) at alternating 30 degree and 60 degree viewing angles. The cameras are positioned 90 degrees apart and sweep 90 degrees during video capture so that the dish is captured from all sides.
+### Detection Models
+- **Gemini API**: Google's Gemini for food detection and labeling
+- **YOLO-World**: Open-vocabulary object detection
+- **YOLOE**: YOLO with enhanced capabilities
+- **Grounding DINO**: Open-set object detection
+- **OWL-ViT**: Open-vocabulary vision transformer
+- **Detectron2**: Facebook's detection framework
+- **Mask R-CNN**: Instance segmentation
 
-After downloading the Nutrition5k dataset, video files will be found in `imagery/side_angles/` and organized by dish id. To extract all 2D image frames from a video, use ffmpeg as shown below:
+### Tracking Models
+- **DeepSORT**: Multi-object tracking
+- **ByteTrack**: High-performance tracking
+- **SAM2**: Segment Anything Model 2 for video tracking
+
+### Segmentation Models
+- **SAM**: Segment Anything Model
+- **SAM2**: Video segmentation
+- **CLIP**: Zero-shot segmentation
+
+## Research & Analysis
+
+The project includes comprehensive analysis documents:
+
+- **Methods Comparison** (`analysis/methods_comparison.md`): Detailed comparison of different detection and segmentation approaches
+- **Cost Analysis** (`analysis/video_processing_cost_analysis.md`, `analysis/gemini_production_cost_analysis.md`): API cost analysis for Gemini and video processing
+- **3D Volume Estimation** (`analysis/gemini_2.5_flash_3d_volume_estimation.md`): Analysis of depth and volume estimation methods
+- **Model Limitations** (`WHY_DETECTIONS_ARE_WRONG.md`): Insights into model limitations and solutions
+
+## Download Food Dataset
+
+The repository includes a utility to download food video datasets:
+
+```bash
+python download_food_dataset.py
 ```
-ffmpeg -i input.mp4 output_%03d.jpeg
-```
 
-The repository includes `scripts/extract_frames.sh` and `scripts/extract_frames_sampled.sh` to help with frame extraction from the downloaded dataset.
+This downloads the food videos dataset from Kaggle for testing and development.
 
-#### Overhead RGB-D Images
-After downloading the dataset, the `imagery/realsense_overhead/` directory contains RGB, raw depth, and colorized depth images organized by dish ID. Raw depth images are encoded as 16-bit integer images with depth units of 10,000 (i.e. 1 meter = 10,000 units). The colorized depth images provide a human-readable visualization of the depth map, with closer objects in blue and further objects in red. All depth values are rounded to a maximum of 0.4m (4,000 depth units), which exceeds the height of our food scanning rig.
+## Dependencies
 
-#### Ingredient Metadata
-After downloading the dataset, the ingredient metadata CSV (`metadata/ingredient_metadata.csv`) contains a list of all ingredients covered in the dataset's dishes, their unique IDs, and per-gram nutritional information sourced from the USDA Food and Nutrient Database. Ingredient IDs take the following form: `ingr_[ingredient number padded to 10 digits]`.
+Key dependencies include:
+- `google-genai` - Gemini API client
+- `opencv-python` - Computer vision operations
+- `transformers` - Hugging Face transformers for Grounding DINO
+- `torch`, `torchvision` - PyTorch for deep learning
+- `ultralytics` - YOLO models
+- `matplotlib` - Visualization
+- `numpy` - Numerical operations
 
-#### Dish Metadata
-After downloading the dataset, the dish metadata CSVs (`metadata/dish_metadata_cafe1.csv` and `metadata/dish_metadata_cafe2.csv`) contain all nutrition metadata at the dish-level, as well as per-ingredient mass and macronutrients. For each dish ID `dish_[10 digit timestamp]`, there is a CSV entry containing the following fields: 
+See `requirements.txt` for the complete list.
 
-<i>dish_id, total_calories, total_mass, total_fat, total_carb, total_protein, num_ingrs, (ingr_1_id, ingr_1_name, ingr_1_grams, ingr_1_calories, ingr_1_fat, ingr_1_carb, ingr_1_protein, ...)</i>
+## License
 
-with the last 8 fields repeated for every ingredient present in the dish.
-
-#### Train/Test Splits
-After downloading the dataset, dish IDs for the training and testing splits are in the `dish_ids/splits/` directory. All incremental scans that compose a unique plate are held within the same split, to avoid overlap between the train and test splits.
-
-#### Evaluation Script
-To help evaluate nutrition prediction methods, we provide `scripts/compute_eval_statistics.py`. This script can be used to calculate absolute and percentage mean average error from a CSV of per-dish nutrition values. See the header file for usage instructions.
-
-## Dataset Bias Disclaimer
-The dataset does not cover all food cuisines, as it was only collected in a few select cafeterias in California, USA. Nutrition5k does not claim to completely solve the food understanding problem, but rather aims to provide a unique level of detailed annotations and depth data to further advance the space.
-
-## License & Contact
-The Nutrition5k dataset is released under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons V4.0</a> license. This repository extends the dataset with additional tools and capabilities for food tracking and analysis.
+This project extends food tracking and analysis capabilities. The Nutrition5k dataset (if used) is released under the Creative Commons V4.0 license.

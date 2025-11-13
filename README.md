@@ -2,22 +2,21 @@
 
 A comprehensive food detection, tracking, and nutrition analysis system using multiple AI models including Gemini, YOLO-World, Grounding DINO, SAM2, and more.
 
-## Video Preview
+## 🎥 Video Preview
 
 <div align="center">
 
-### 🎥 Example Tracking Video
+### Watch the Demo Video
 
-<video width="800" controls>
-  <source src="./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[![Food Tracking Demo Video](https://img.shields.io/badge/▶️-Watch%20Video%20Demo-red?style=for-the-badge)](./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4)
 
-**Direct Link**: [smart_tracked_WhatsApp Video 2025-09-10 at 05.16.56_9874c762.mp4](./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4)
+**📹 [Click here to view/download the tracking video](./smart_tracked_WhatsApp%20Video%202025-09-10%20at%2005.16.56_9874c762.mp4)**
+
+> **Note**: Click the link above to view the video. GitHub will display it as a downloadable file that you can play in your browser or download.
 
 **What this video demonstrates:**
 - ✅ Food item detection and tracking with continuous IDs
-- ✅ Segmentation masks for each tracked item
+- ✅ Segmentation masks for each tracked item  
 - ✅ Frame-by-frame object persistence
 - ✅ Real-time visualization of tracking results
 
